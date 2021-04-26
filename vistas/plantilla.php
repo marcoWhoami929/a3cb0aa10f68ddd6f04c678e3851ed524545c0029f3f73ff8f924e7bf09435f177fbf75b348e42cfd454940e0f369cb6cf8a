@@ -42,10 +42,18 @@ session_start();
 
     <!-- Main Script -->
     <script src="vistas/modulos/js/script.js"></script>
-    <script src="vistas/modulos/js/jquery.countdown.min.js"></script>
-       
 
-    
+    <?php
+      if (isset($_GET["ruta"])) {
+          if ($_GET["ruta"] == "inicio") {
+            echo '<script src="vistas/modulos/js/jquery.countdown.min.js"></script>';
+          }
+      }else{
+
+        echo '<script src="vistas/modulos/js/jquery.countdown.min.js"></script>';
+
+      }
+    ?>
 
 </head>
 
@@ -87,7 +95,7 @@ HEADER
  
 ?>
 <!--SCRIPTS JS-->
-
+<script src="vistas/modulos/js/acciones.js"></script>
 <!--SCRIPTS JS-->
 </body>
 </html>

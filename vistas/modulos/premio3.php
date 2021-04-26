@@ -1,13 +1,13 @@
 <?php
-$parametros = "montoAcumulado >= 10000";
-$clasificacion1 = ControladorRuleta::ctrObtenerParticipantesPremios($parametros);
-$total = $clasificacion1["total"];
+$parametros = "montoAcumulado > 0 and montoAcumulado <=4999";
+$clasificacion3 = ControladorRuleta::ctrObtenerParticipantesPremios($parametros);
+$total = $clasificacion3["total"];
 ?>
 <section class="page-title-alt bg-primary position-relative">
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1 class="text-white font-tertiary">PREMIO 1</h1>
+        <h1 class="text-white font-tertiary">PREMIO 3</h1>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@ $total = $clasificacion1["total"];
       
       <div class="col-md-4 text-center drag-lg-top" id="panchoPintor">
         <div class="shadow-down mb-4">
-          <img src="vistas/modulos/images/panchoPintor.png" alt="" class="img-fluid w-100" >
+          <img src="vistas/modulos/images/panchoPintor.png" alt="author" class="img-fluid w-100">
         </div>
        
       </div>

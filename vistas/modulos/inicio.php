@@ -1,3 +1,10 @@
+<?php
+
+$obtenerEstadisticas = ControladorRuleta::ctrObtenerEstadisticas();
+$participantes = $obtenerEstadisticas[0][0];
+$boletos = $obtenerEstadisticas[1][0];
+$facturas = $obtenerEstadisticas[2][0];
+?>
 <section class="hero-area bg-primary" id="parallax">
   <div class="container">
     <div class="row">
@@ -60,7 +67,7 @@
             <i class="ti-medall icon icon-light icon-bg bg-white shadow rounded-circle d-block"></i>
           </div>
           <div>
-            <h2 class="text-dark mb-1">100</h2>
+            <h2 class="text-dark mb-1"><?php echo $participantes ?></h2>
             <h4>Participantes</h4>
             <p class="mb-0 text-light">Registrados</p>
           </div>
@@ -72,7 +79,7 @@
             <i class="ti-wallet icon icon-light icon-bg bg-white shadow rounded-circle d-block"></i>
           </div>
           <div>
-            <h2 class="text-dark mb-1">500</h2>
+            <h2 class="text-dark mb-1"><?php echo $boletos ?></h2>
             <h4>Boletos</h4>
             <p class="mb-0 text-light">Generados</p>
           </div>
@@ -84,7 +91,7 @@
             <i class="ti-wallet icon icon-light icon-bg bg-white shadow rounded-circle d-block"></i>
           </div>
           <div>
-            <h2 class="text-dark mb-1">50</h2>
+            <h2 class="text-dark mb-1"><?php echo $facturas ?></h2>
             <h4>Facturas</h4>
             <p class="mb-0 text-light">Registradas</p>
           </div>
@@ -115,10 +122,10 @@
                             <div class='datas'>
                               <a class='link'>
                                 <div class='ribbon'>
-                                  <div class='label'>1</div>
+                                  <div class='label'>3</div>
                                 </div>
                                 <h4>Premio</h4>
-                                 <a href="premio1"><img src="vistas/modulos/images/pistola-sagola.png" alt="bg-shape" width="50%"></a>
+                                 <a href="premio1" class="indicadorPremio" idPremio="3"><img src="vistas/modulos/images/esmeriladora.png" alt="bg-shape" width="50%"></a>
                                 <strong></strong>
                                 <em></em>
                               </a>
@@ -136,7 +143,7 @@
                                   <div class='label'>2</div>
                                 </div>
                                 <h4>Premio</h4>
-                                  <a href="premio2"><img src="vistas/modulos/images/pistola-acuspray.png" alt="bg-shape" width="50%"></a>
+                                  <a href="premio2" class="indicadorPremio" idPremio="2"><img src="vistas/modulos/images/pistola-acuspray.png" alt="bg-shape" width="50%"></a>
                                 <strong></strong>
                                 <em></em>
                               </a>
@@ -151,10 +158,10 @@
                             <div class='datas'>
                               <a class='link'>
                                 <div class='ribbon'>
-                                  <div class='label'>3</div>
+                                  <div class='label'>1</div>
                                 </div>
                                 <h4>Premio</h4>
-                                <a href="premio3"><img src="vistas/modulos/images/esmeriladora.png" alt="bg-shape" width="50%"></a>
+                                <a href="premio3" class="indicadorPremio" idPremio="1"><img src="vistas/modulos/images/pistola-sagola.png" alt="bg-shape" width="50%"></a>
                                 <strong></strong>
                                 <em></em>
                               </a>
