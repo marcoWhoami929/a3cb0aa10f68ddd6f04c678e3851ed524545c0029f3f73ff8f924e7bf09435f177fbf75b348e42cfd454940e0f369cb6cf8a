@@ -70,8 +70,9 @@ HEADER
               //include "modulos/404.php";
           }else{
 
-
+            include "modulos/header.php";
             include "modulos/".$_GET["ruta"].".php";
+            include "modulos/footer.php";
             
 
           }   
