@@ -4,6 +4,8 @@ FUNCION PARA ELEIMINAR ELEMENTO DE ARREGLO PARTICIPANTES
 
 $(".indicadorPremio").on("click",function(event){
 	var idPremio = $(this).attr("idPremio");
+	localStorage.setItem("numeroPremio",idPremio);
+
 	event.preventDefault();
 
 	var datos = new FormData();
@@ -21,7 +23,8 @@ $(".indicadorPremio").on("click",function(event){
         	
         	var arreglo = JSON.stringify(respuesta);
         	localStorage.setItem("participantes",arreglo);
-			location.href="premio"+idPremio+"";
+        
+			location.href="premios";
         
       }
   

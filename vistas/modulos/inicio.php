@@ -125,7 +125,7 @@ $facturas = $obtenerEstadisticas[2][0];
                                   <div class='label'>3</div>
                                 </div>
                                 <h4>Premio</h4>
-                                 <a href="premio1" class="indicadorPremio" idPremio="3"><img src="vistas/modulos/images/esmeriladora.png" alt="bg-shape" width="50%"></a>
+                                 <a href="premios" class="indicadorPremio" idPremio="3"><img src="vistas/modulos/images/esmeriladora.png" alt="bg-shape" width="50%"></a>
                                 <strong></strong>
                                 <em></em>
                               </a>
@@ -143,7 +143,7 @@ $facturas = $obtenerEstadisticas[2][0];
                                   <div class='label'>2</div>
                                 </div>
                                 <h4>Premio</h4>
-                                  <a href="premio2" class="indicadorPremio" idPremio="2"><img src="vistas/modulos/images/pistola-acuspray.png" alt="bg-shape" width="50%"></a>
+                                  <a href="premios" class="indicadorPremio" idPremio="2"><img src="vistas/modulos/images/pistola-acuspray.png" alt="bg-shape" width="50%"></a>
                                 <strong></strong>
                                 <em></em>
                               </a>
@@ -161,7 +161,7 @@ $facturas = $obtenerEstadisticas[2][0];
                                   <div class='label'>1</div>
                                 </div>
                                 <h4>Premio</h4>
-                                <a href="premio3" class="indicadorPremio" idPremio="1"><img src="vistas/modulos/images/pistola-sagola.png" alt="bg-shape" width="50%"></a>
+                                <a href="premios" class="indicadorPremio" idPremio="1"><img src="vistas/modulos/images/pistola-sagola.png" alt="bg-shape" width="50%"></a>
                                 <strong></strong>
                                 <em></em>
                               </a>

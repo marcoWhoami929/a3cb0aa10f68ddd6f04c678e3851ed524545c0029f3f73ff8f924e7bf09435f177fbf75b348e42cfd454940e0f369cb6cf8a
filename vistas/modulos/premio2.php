@@ -1,8 +1,4 @@
-<?php
-$parametros = "montoAcumulado >= 5000 and montoAcumulado <=9999";
-$clasificacion3 = ControladorRuleta::ctrObtenerParticipantesPremios($parametros);
-$total = $clasificacion3["total"];
-?>
+
 <section class="page-title-alt bg-primary position-relative">
   <div class="container">
     <div class="row">

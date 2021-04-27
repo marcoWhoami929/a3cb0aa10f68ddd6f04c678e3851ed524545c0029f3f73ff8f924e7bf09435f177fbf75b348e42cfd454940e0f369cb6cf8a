@@ -81,7 +81,19 @@ h6, .h6 {
 /* Button style */
 .btn {
   font-size: 14px;
-
+  font-family: "Roboto", sans-serif;
+  text-transform: capitalize;
+  padding: 11px 25px;
+  border-radius: 5px;
+  font-weight: 600;
+  border: 0;
+  position: relative;
+  z-index: 1;
+  transition: .2s ease;
+}
+.btn2{
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
   text-transform: capitalize;
   padding: 11px 25px;
   border-radius: 5px;
@@ -117,15 +129,15 @@ h6, .h6 {
 }
 
 .btn-primary:active {
-  background: #542cb7 !important;
+  background: #BA007C !important;
 }
 
 .btn-primary:hover {
-  background: #542cb7;
+  background: #BA007C;
 }
 
 .btn-primary.focus, .btn-primary.active {
-  background: #542cb7 !important;
+  background: #BA007C !important;
   box-shadow: none !important;
 }
 
@@ -145,12 +157,12 @@ body {
 }
 
 ::-moz-selection {
-  background: #542cb7;
+  background: #BA007C;
   color: #fff;
 }
 
 ::selection {
-  background: #542cb7;
+  background: #BA007C;
   color: #fff;
 }
 
@@ -575,9 +587,9 @@ textarea.form-control {
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 45%;
   -webkit-transform: translateX(-50%) rotate(0);
-          transform: translateX(-50%) rotate(0);
+  transform: translateX(-50%) rotate(0);
   -webkit-animation: rotate 6s linear infinite;
-          animation: rotate 6s linear infinite;
+  animation: rotate 6s linear infinite;
   z-index: 10;
 }
 
@@ -585,31 +597,31 @@ textarea.form-control {
   border-radius: 47%;
   background-color: rgba(255, 255, 255, 0.9);
   -webkit-transform: translateX(-50%) rotate(0);
-          transform: translateX(-50%) rotate(0);
+  transform: translateX(-50%) rotate(0);
   -webkit-animation: rotate 10s linear -5s infinite;
-          animation: rotate 10s linear -5s infinite;
+  animation: rotate 10s linear -5s infinite;
   z-index: 20;
 }
 
 @-webkit-keyframes rotate {
   50% {
     -webkit-transform: translateX(-50%) rotate(180deg);
-            transform: translateX(-50%) rotate(180deg);
+    transform: translateX(-50%) rotate(180deg);
   }
   100% {
     -webkit-transform: translateX(-50%) rotate(360deg);
-            transform: translateX(-50%) rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
   }
 }
 
 @keyframes rotate {
   50% {
     -webkit-transform: translateX(-50%) rotate(180deg);
-            transform: translateX(-50%) rotate(180deg);
+    transform: translateX(-50%) rotate(180deg);
   }
   100% {
     -webkit-transform: translateX(-50%) rotate(360deg);
-            transform: translateX(-50%) rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
   }
 }
 
@@ -662,12 +674,12 @@ textarea.form-control {
 .hover-wrapper img {
   transition: .3s ease;
   -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .hover-wrapper:hover img {
   -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
 }
 
 .hover-wrapper:hover .hover-overlay {
@@ -692,7 +704,7 @@ textarea.form-control {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   left: 0;
   right: 0;
   text-align: center;
@@ -715,7 +727,7 @@ textarea.form-control {
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .testimonial-bg-shapes .bg-shape-1 {
@@ -851,7 +863,7 @@ blockquote {
   left: 30%;
   top: 50px;
   -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .page-title-alt .bg-shape-4 {
@@ -911,7 +923,7 @@ blockquote {
   left: 90px;
   bottom: -50px;
   -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .page-title .bg-shape-6 {
@@ -937,35 +949,35 @@ blockquote {
 /*# sourceMappingURL=maps/style.css.map */
 #tiempo{
   text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9,
-0 3px 0 #bbb,
-0 4px 0 #b9b9b9,
-0 5px 0 #aaa,
-0 6px 1px rgba(0,0,0,.1),
-0 0 5px rgba(0,0,0,.1),
-0 1px 3px rgba(0,0,0,.3),
-0 3px 5px rgba(0,0,0,.2),
-0 5px 10px rgba(0,0,0,.25),
-0 10px 10px rgba(0,0,0,.2),
-0 20px 20px rgba(0,0,0,.15);
-font-size: 150px;
+  0 3px 0 #bbb,
+  0 4px 0 #b9b9b9,
+  0 5px 0 #aaa,
+  0 6px 1px rgba(0,0,0,.1),
+  0 0 5px rgba(0,0,0,.1),
+  0 1px 3px rgba(0,0,0,.3),
+  0 3px 5px rgba(0,0,0,.2),
+  0 5px 10px rgba(0,0,0,.25),
+  0 10px 10px rgba(0,0,0,.2),
+  0 20px 20px rgba(0,0,0,.15);
+  font-size: 150px;
 }
 #textInicio h2 { 
   position: relative; 
- 
+
   color: #fff;
   font-size: 4.0em;
 }
 
 #textInicio h2 span {
-    position:absolute;
-    right:0;
-    width:0;
-    background: #BA007C;
-    border-left: 1px solid #000;
-    animation: escribir 5s steps(30) infinite alternate;
+  position:absolute;
+  right:0;
+  width:0;
+  background: #BA007C;
+  border-left: 1px solid #000;
+  animation: escribir 5s steps(30) infinite alternate;
 }
 
 @keyframes escribir {
-    from { width: 100% }
-    to { width:0 }
+  from { width: 100% }
+  to { width:0 }
 }

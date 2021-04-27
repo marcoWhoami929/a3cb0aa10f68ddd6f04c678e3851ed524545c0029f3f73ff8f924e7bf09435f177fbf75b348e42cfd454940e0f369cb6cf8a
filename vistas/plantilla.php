@@ -31,8 +31,36 @@ session_start();
     <link rel="shortcut icon" href="vistas/modulos/images/logo.ico" type="image/x-icon">
     <link rel="icon" href="vistas/modulos/images/logo.ico" type="image/x-icon">
 
-    <!-- jQuery -->
-    <script src="vistas/modulos/plugins/jQuery/jquery.min.js"></script>
+      <?php
+      if (isset($_GET["ruta"])) {
+       
+          if ($_GET["ruta"] == "premios") {
+            echo '<link href="vistas/modulos/css/raffle.css" rel="stylesheet">';
+            echo '<link href="vistas/modulos/css/styleRaffle.css" rel="stylesheet">';
+          }
+      }else{
+
+        
+
+      }
+    ?>
+
+    <?php
+      if (isset($_GET["ruta"])) {
+          if ($_GET["ruta"] == "inicio") {
+            echo '<script src="vistas/modulos/plugins/jQuery/jquery.js"></script>';
+          }
+          if ($_GET["ruta"] == "premios") {
+              echo '<script src="vistas/modulos/plugins/jQuery/jquery.min.js"></script>';
+            
+          }
+      }else{
+
+        echo '<script src="vistas/modulos/plugins/jQuery/jquery.js"></script>';
+
+      }
+    ?>
+    
     <!-- Bootstrap JS -->
     <script src="vistas/modulos/plugins/bootstrap/bootstrap.min.js"></script>
     <!-- slick slider -->
@@ -47,6 +75,11 @@ session_start();
       if (isset($_GET["ruta"])) {
           if ($_GET["ruta"] == "inicio") {
             echo '<script src="vistas/modulos/js/jquery.countdown.min.js"></script>';
+          }
+          if ($_GET["ruta"] == "premios") {
+            echo '<script src="vistas/modulos/plugins/jQuery/jquery-ui-1.8.23.custom.min.js"></script>';
+            echo '<script src="vistas/modulos/js/names.js"></script>';
+            echo '<script src="vistas/modulos/js/raffle.js"></script>';
           }
       }else{
 
@@ -80,7 +113,11 @@ HEADER
 
             include "modulos/header.php";
             include "modulos/".$_GET["ruta"].".php";
-            include "modulos/footer.php";
+            if ($_GET["ruta"] == "inicio") {
+              include "modulos/footer.php";
+            }else{
+
+            }
             
 
           }   
@@ -88,7 +125,7 @@ HEADER
      }else{
         include "modulos/header.php";
         include "modulos/inicio.php";
-        include "modulos/footer.php";
+        
      }
 
     echo '</div>';

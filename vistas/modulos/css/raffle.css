@@ -1,0 +1,126 @@
+
+.ticket {
+	font-family: "Verdana";
+	display:inline-block;
+	font-size: 35px;
+	background-color: #001D7E;
+	color: white;
+	padding: 50px;
+	margin:5px;
+	text-shadow: 0px 1px 1px #999;
+	font-weight: bold;
+	box-sizing: border-box;
+	border-radius: 16px;
+	transition: background .5s;
+	-webkit-transition: background .5s;
+	
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select:none;
+	-khtml-user-select:none;
+}
+
+.ticket {
+	background-color: #001D7E;
+	height: 180px;
+	width: 300px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select:none;
+	-khtml-user-select:none;
+}
+.ticket:before {
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 
+	300px 0 0 0 #fff, 
+	0 180px 0 0 #fff, 
+	300px 180px 0 0 #fff,
+	0 40px 0 -20px #fff,
+	0 60px 0 -20px #fff,
+	0 80px 0 -20px #fff,
+	0 100px 0 -20px #fff,
+	0 120px 0 -20px #fff,
+	0 140px 0 -20px #fff,
+	300px 40px 0 -20px #fff,
+	300px 60px 0 -20px #fff,
+	300px 80px 0 -20px #fff,
+	300px 100px 0 -20px #fff,
+	300px 120px 0 -20px #fff,
+	300px 140px 0 -20px #fff;
+	content: "";
+	display: block;
+	height: 50px;
+	left: -25px;
+	position: absolute;
+	top: -25px;
+	width: 50px;
+}
+
+
+
+.input{
+	width:300px;
+	height: 115px;
+	margin: 50px auto;
+
+	-webkit-border-radius: 16px;
+	border-radius: 16px; 
+	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+
+	-webkit-box-shadow: 0px 0px 6px 0px #000;
+	box-shadow: 0px 0px 6px 0px #000;
+}
+
+.enter-names{
+	width:1000px;
+
+	margin-top: -100px;
+}
+
+textarea {
+	margin: 10px auto;
+	height:300px;
+	width:300px;
+	resize: both;
+	overflow: auto;
+}
+
+input[type="checkbox"], input[type="number"] {
+	margin: 0 10px 10px 0;
+
+}
+
+
+button {
+	float: right;
+}
+
+.load {
+	border:1px solid grey;
+	width:60px;
+	font-size: 20px;
+	text-align: center;
+	margin: 0 auto;
+	background: #9fd4d4;
+	-webkit-border-radius: 16px;
+	border-radius: 16px; 
+	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+	cursor: pointer;
+
+	-webkit-user-select: none;
+	-moz-user-select:none;
+	-khtml-user-select:none;
+}
+
+.load:hover{
+	background: palegreen;
+}
+
+.loading{
+	width:675px;
+	text-align: center;
+	margin:50px auto;
+	color:rgba(255,255,255,.5);
+	font-size: 200px;
+}
