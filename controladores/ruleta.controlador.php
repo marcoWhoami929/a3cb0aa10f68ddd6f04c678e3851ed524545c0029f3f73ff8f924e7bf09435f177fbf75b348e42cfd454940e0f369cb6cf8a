@@ -25,6 +25,15 @@ class ControladorRuleta
 
 
 	}
+	static public function ctrGuardarDescartados($tabla,$datos){
+
+		$respuesta = ModeloRuleta::mdlGuardarDescartados($tabla,$datos);
+
+		return $respuesta;
+
+
+	}
+	
 
 
 

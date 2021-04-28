@@ -15,7 +15,7 @@ function process(){
 	imported = [];
     folios.forEach(function (boleto) {
  
-	    imported.push({'name':boleto.folioBoleto,'participante':boleto.participante,'idBoleto':boleto.idBoleto,'idParticipante':boleto.idParticipante});
+	    imported.push({'idBoleto':boleto.folioBoleto,'participante':boleto.participante,'idBoleto':boleto.idBoleto,'idParticipante':boleto.idParticipante});
 	     
 	});
     
@@ -55,13 +55,13 @@ function remainingParticipants() {
 	return participants;
 }
 
-function Ticket(name, points){
-	this.name = name;
+function Ticket(idBoleto, points){
+	this.idBoleto = idBoleto;
 	if(typeof(points) == "number")
 		this.points = points;
 	else
 		this.points = 1;
-	this.dom = $("<div class='ticket'>").text("#"+name);
+	this.dom = $("<div class='ticket' participante=''>").text("#"+idBoleto);
 	this.fixPosition = function(){
 		var me = this;
 		this.dom.css({
@@ -102,29 +102,42 @@ function toggleRemoveWinners() {
 var removeDuplicateNames = function(data){
 	var seen = {};
 	return data.filter(function(d){
-		if(seen[d.name.toLowerCase()]){
+		if(seen[d.idBoleto.toLowerCase()]){
 			return false;
 		}
-		seen[d.name.toLowerCase()] = true;
+		seen[d.idBoleto.toLowerCase()] = true;
 		return true;
 	});
 }
 
 function standardizedImported() {
 	var namePoints = {};
+	var arreglo = imported;
+	imported = [];
+	
+	for (var i = 0; i < arreglo.length; i++) {
+		imported.push({'idBoleto': arreglo[i]["idBoleto"],'participante': arreglo[i]["participante"], 'points': 1});
+	}
 	console.log(imported);
+	/*
 	for (var entry of imported) {
 		var points = (entry.points === undefined ? 1 : entry.points);
-		if (entry.name in namePoints) {
-			namePoints[entry.name] += points;
+		if (entry.idBoleto in namePoints) {
+			namePoints[entry.idBoleto] += points;
 		} else {
-			namePoints[entry.name] = points;
+			namePoints[entry.idBoleto] = points;
 		}
+		
 	}
 	imported = [];
-	for (var name in namePoints) {
-		imported.push({name: name, points: namePoints[name]});
+	for (var i = 0; i < imported.length; i++) {
+		var participante = imported[i]["participante"];
 	}
+	console.log(namePoints);
+	for (var idBoleto in namePoints) {
+		imported.push({idBoleto: idBoleto,participante: participante, points: namePoints[idBoleto]});
+	}
+	*/
 	return imported;
 }
 
@@ -140,7 +153,7 @@ var makeTicketsWithPoints = function(){
 			tdata.points = 1;
 		}
 		if (tdata.points > 0) {
-			var t = new Ticket(tdata.name, tdata.points);
+			var t = new Ticket(tdata.idBoleto, tdata.points);
 			t.dom.appendTo($('body'));
 			tickets.push(t);
 		}
@@ -200,9 +213,9 @@ var pickName = function(){
 	} else {
 		if (removeWinners) {
             choices.forEach(choice => {
-                var winner = choice.name;
+                var winner = choice.idBoleto;
                 for (var entry of imported) {
-                    if (entry.name == winner) {
+                    if (entry.idBoleto == winner) {
                         entry.points--;
                     }
                 }

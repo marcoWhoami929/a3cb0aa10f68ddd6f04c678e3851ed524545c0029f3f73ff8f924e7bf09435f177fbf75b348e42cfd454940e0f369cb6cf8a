@@ -67,5 +67,6 @@
       });
       $("textarea#areaBoletos").val(boletosCargados);
       $("#nombrePremio").html("Premio "+localStorage.numeroPremio+"");
+      
   });
 </script>

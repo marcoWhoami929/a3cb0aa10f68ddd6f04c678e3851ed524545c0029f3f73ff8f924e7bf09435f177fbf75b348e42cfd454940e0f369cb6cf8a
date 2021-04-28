@@ -70,6 +70,7 @@ session_start();
 
     <!-- Main Script -->
     <script src="vistas/modulos/js/script.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <?php
       if (isset($_GET["ruta"])) {
@@ -78,8 +79,7 @@ session_start();
           }
           if ($_GET["ruta"] == "premios") {
             echo '<script src="vistas/modulos/plugins/jQuery/jquery-ui-1.8.23.custom.min.js"></script>';
-            echo '<script src="vistas/modulos/js/names.js"></script>';
-            echo '<script src="vistas/modulos/js/raffle.js"></script>';
+          
           }
       }else{
 
@@ -133,6 +133,8 @@ HEADER
 ?>
 <!--SCRIPTS JS-->
 <script src="vistas/modulos/js/acciones.js"></script>
+<script src="vistas/modulos/js/names.js"></script>
+<script src="vistas/modulos/js/raffle.js"></script>
 <!--SCRIPTS JS-->
 </body>
 </html>

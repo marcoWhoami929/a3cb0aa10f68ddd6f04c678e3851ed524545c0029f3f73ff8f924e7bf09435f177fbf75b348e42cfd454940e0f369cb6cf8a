@@ -22,8 +22,8 @@
 
 .ticket {
 	background-color: #001D7E;
-	height: 180px;
-	width: 300px;
+	height: 100px;
+	width: 180px;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select:none;

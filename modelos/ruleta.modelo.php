@@ -43,6 +43,32 @@ class ModeloRuleta
 		$stmt = null;
 
 	}
+	static public function mdlGuardarDescartados($tabla,$datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idParticipante, idBoleto, folioBoleto, numPremio, premio) VALUES(:idParticipante, :idBoleto, :folioBoleto, :numPremio, :premio)");
+
+		
+		$stmt->bindParam(":idParticipante", $datos["idParticipante"], PDO::PARAM_INT);
+		$stmt->bindParam(":idBoleto", $datos["idBoleto"], PDO::PARAM_INT);
+		$stmt->bindParam(":folioBoleto", $datos["folioBoleto"], PDO::PARAM_STR);
+		$stmt->bindParam(":numPremio", $datos["numPremio"], PDO::PARAM_INT);
+		$stmt->bindParam(":premio", $datos["premio"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";	
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+	}
 	
 }
 

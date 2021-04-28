@@ -11,11 +11,11 @@ var numberOfWinnersPerRound = 1;
 
 function process(){
 	var folios = JSON.parse(localStorage.participantes);
-	console.log(folios);
+	
 	imported = [];
     folios.forEach(function (boleto) {
  
-	    imported.push({'idBoleto':boleto.folioBoleto,'participante':boleto.participante,'idBoleto':boleto.idBoleto,'idParticipante':boleto.idParticipante});
+	    imported.push({'folioBoleto':boleto.folioBoleto,'participante':boleto.participante,'idBoleto':boleto.idBoleto,'idParticipante':boleto.idParticipante});
 	     
 	});
     
@@ -55,13 +55,13 @@ function remainingParticipants() {
 	return participants;
 }
 
-function Ticket(idBoleto, points){
-	this.idBoleto = idBoleto;
+function Ticket(idBoleto,folioBoleto,idParticipante,participante,points){
+	this.folioBoleto = folioBoleto;
 	if(typeof(points) == "number")
 		this.points = points;
 	else
 		this.points = 1;
-	this.dom = $("<div class='ticket' participante=''>").text("#"+idBoleto);
+	this.dom = $("<div class='ticket' idBoleto='"+idBoleto+"' folioBoleto='"+folioBoleto+"' idParticipante='"+idParticipante+"' participante='"+participante+"'>").text("#"+folioBoleto);
 	this.fixPosition = function(){
 		var me = this;
 		this.dom.css({
@@ -102,42 +102,33 @@ function toggleRemoveWinners() {
 var removeDuplicateNames = function(data){
 	var seen = {};
 	return data.filter(function(d){
-		if(seen[d.idBoleto.toLowerCase()]){
+		if(seen[d.folioBoleto.toLowerCase()]){
 			return false;
 		}
-		seen[d.idBoleto.toLowerCase()] = true;
+		seen[d.folioBoleto.toLowerCase()] = true;
 		return true;
 	});
 }
 
 function standardizedImported() {
 	var namePoints = {};
+	
 	var arreglo = imported;
-	imported = [];
-
-	for (var i = 0; i < arreglo.length; i++) {
-		imported.push({idBoleto: arreglo[i]["idBoleto"],participante: participante, points: namePoints[idBoleto]});
-	}
-	console.log(imported);
-	/*
 	for (var entry of imported) {
 		var points = (entry.points === undefined ? 1 : entry.points);
-		if (entry.idBoleto in namePoints) {
-			namePoints[entry.idBoleto] += points;
+		if (entry.folioBoleto in namePoints) {
+			namePoints[entry.folioBoleto] += points;
 		} else {
-			namePoints[entry.idBoleto] = points;
+			namePoints[entry.folioBoleto] = points;
 		}
-		
 	}
 	imported = [];
-	for (var i = 0; i < imported.length; i++) {
-		var participante = imported[i]["participante"];
-	}
-	console.log(namePoints);
-	for (var idBoleto in namePoints) {
-		imported.push({idBoleto: idBoleto,participante: participante, points: namePoints[idBoleto]});
-	}
-	*/
+	
+		for (var folioBoleto of arreglo) {
+			imported.push({'idBoleto': folioBoleto["idBoleto"],folioBoleto: folioBoleto["folioBoleto"],'participante': folioBoleto["participante"],'idParticipante': folioBoleto["idParticipante"],points: namePoints[folioBoleto["folioBoleto"]]});
+	
+		}
+	
 	return imported;
 }
 
@@ -148,12 +139,12 @@ var makeTicketsWithPoints = function(){
 	$('.ticket').remove();
 
 	map(removeDuplicateNames(imported), function(tdata){
-		console.log(tdata);
+	
 		if (tdata.points === undefined) {
 			tdata.points = 1;
 		}
 		if (tdata.points > 0) {
-			var t = new Ticket(tdata.idBoleto, tdata.points);
+			var t = new Ticket(tdata.idBoleto,tdata.folioBoleto,tdata.idParticipante,tdata.participante,tdata.points);
 			t.dom.appendTo($('body'));
 			tickets.push(t);
 		}
@@ -174,15 +165,39 @@ var makeTicketsWithPoints = function(){
 			ticket.fixPosition();
 		});
 		$('#iniciarRifa').unbind('click').click(function(){
-			var width = $('#participant-number').text(tickets.length + '/' + tickets.length).width();
-			$('#participant-number').css('width', width + 'px'); //keep position consistent during countdown
-			pickName();
+			var vueltas = localStorage.vueltas;
+			if (vueltas == 0) {
+				localStorage.setItem("vueltas",1);
+				var width = $('#participant-number').text(tickets.length + '/' + tickets.length).width();
+				$('#participant-number').css('width', width + 'px'); //keep position consistent during countdown
+				pickName();
+			}
+			else if(vueltas == 3){
+				Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'Ya se han realizado los 3 giros',
+				  
+				})
+				localStorage.setItem("vueltas",0);
+				location.href="inicio";
+
+			}else{
+				var vuelta = vueltas*1+1;
+				localStorage.setItem("vueltas",vuelta);
+				var width = $('#participant-number').text(tickets.length + '/' + tickets.length).width();
+				$('#participant-number').css('width', width + 'px'); //keep position consistent during countdown
+				pickName();
+
+			}
+			
 		});
 	}, 800);
 }
 
 var getChoices = function(){
 	var result = [];
+
 	map(tickets, function(ticket){
 		for (var i = 0; i < ticket.points; i++)
 			result.push(ticket)
@@ -212,10 +227,12 @@ var pickName = function(){
 		});
 	} else {
 		if (removeWinners) {
+			
             choices.forEach(choice => {
-                var winner = choice.idBoleto;
+                var winner = choice.folioBoleto;
+
                 for (var entry of imported) {
-                    if (entry.idBoleto == winner) {
+                    if (entry.folioBoleto == winner) {
                         entry.points--;
                     }
                 }
@@ -223,22 +240,99 @@ var pickName = function(){
         }
         
         if (numberOfWinnersPerRound == 1) {
-            choices = $(choices[0].dom);
+        	var premios = localStorage.premios; 
+	      	var premios = premios.split(",");
+	      	var vueltas = localStorage.vueltas*1;
+        	choices = $(choices[0].dom);
             var top = choices.css('top');
             var left = choices.css('left');
             var fontsize = choices.css('font-size');
             var width = choices.width();
+
+            var participanteGanador = choices.attr("participante");
+	        var idParticipante = choices.attr("idParticipante");
+	        var numeroPremio = localStorage.numeroPremio;
+	        var premio = premios[vueltas-1];
+	        var idBoleto = choices.attr("idBoleto");
+	        var folioBoleto = choices.attr("folioBoleto");
+
+            
             choices.click(function(){
-                inProgress = false;
+
+	          /*
+	          	var datos2 = new FormData();
+	            datos2.append("idParticipanteDescartado",idParticipante);
+	            datos2.append("idBoletoDescartado",idBoleto);
+	            datos2.append("folioBoletoDescartado",folioBoleto);
+	            datos2.append("numPremioDescartado",numeroPremio);
+	            datos2.append("premioDescartado",premio);
+	             $.ajax({
+			      url:"ajax/ruleta.ajax.php",
+			      method: "POST",
+			      data: datos2,
+			      cache: false,
+			      contentType: false,
+			      processData: false,
+			      dataType: "json",
+			      success: function(respuesta){ 
+			        	var response = respuesta;
+			             var responseFinal = response.replace(/['"]+/g, '');
+			             if (responseFinal == "ok") { 
+			             	alert("registrado");
+			            
+			             } else{
+			             	alert("error");
+			             }
+			        	
+			      }
+			  
+			    })
+			    */
+	            
+	             let timerInterval;
+	             Swal.fire({
+				  title: '<h1 style="color:#001781;fontsize:80px">!FELICIDADES!</h1><br> '+participanteGanador+' <br>Has Ganado <br><h2 style="color:#BA007C;fontsize:20px">'+premios[vueltas-1]+'</h2>',
+				
+				  width: 800,
+				  padding: '3em',
+				  background: '#fff',
+				  backdrop: `
+				    rgba(0,0,123,0.4)
+				    url("http://www.gifmania.com/Gif-Animados-Objetos/Imagenes-Juguetes/Globos/Globos-Colores-Volando-84851.gif")
+				    
+				  `,
+				   timer: 4000,
+				  timerProgressBar: true,
+				  didOpen: () => {
+				    Swal.showLoading()
+				    timerInterval = setInterval(() => {
+				      const content = Swal.getContent()
+				      if (content) {
+				        const b = content.querySelector('b')
+				        if (b) {
+				          b.textContent = Swal.getTimerLeft()
+				        }
+				      }
+				    }, 100)
+				  },
+				  willClose: () => {
+				    clearInterval(timerInterval)
+				     inProgress = false;
                 choices.animate({'font-size':fontsize,'top':top,'left':left},'slow');
                 $('.ticket').show(500).unbind('click');
                 setTimeout(function(){
                     makeTicketsWithPoints();
                 }, 700);
+				  }
+				})
+	             
+            
+                
             });
             choices.animate({'font-size':60 +'px','top':(window.innerHeight/5) + 'px','left':(window.innerWidth/2 - width) + 'px'},1500, function(){
                 choices.animate({'left':(window.innerWidth/2 - choices.width()/2) + 'px'}, 'slow');
             });
+            
         } else {
             choices.forEach(c => {
                 $(c.dom).animate({
@@ -247,7 +341,7 @@ var pickName = function(){
                 $(c.dom).css('background', '#EE8800');
             });
             $('#iniciarRifa').click(() => {
-                makeTicketsWithPoints();
+                //makeTicketsWithPoints();
             });
         }
 	}
