@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-04-2021 a las 01:29:08
+-- Tiempo de generación: 29-04-2021 a las 01:22:47
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 7.3.27
 
@@ -324,6 +324,9 @@ INSERT INTO `boletos` (`id`, `idParticipante`, `idFactura`, `folioBoleto`, `fech
 CREATE TABLE `descartados` (
   `id` int(11) NOT NULL,
   `idParticipante` int(11) NOT NULL,
+  `idBoleto` int(11) NOT NULL,
+  `folioBoleto` text COLLATE utf8_spanish_ci NOT NULL,
+  `numPremio` int(11) NOT NULL,
   `premio` text COLLATE utf8_spanish_ci NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -1172,7 +1175,10 @@ INSERT INTO `facturas` (`id`, `cliente`, `serie`, `folio`, `total`, `fechaFactur
 CREATE TABLE `ganadores` (
   `id` int(11) NOT NULL,
   `idParticipante` int(11) NOT NULL,
+  `idBoleto` int(11) NOT NULL,
+  `folioBoleto` text COLLATE utf8_spanish_ci NOT NULL,
   `premio` text COLLATE utf8_spanish_ci NOT NULL,
+  `numPremio` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
