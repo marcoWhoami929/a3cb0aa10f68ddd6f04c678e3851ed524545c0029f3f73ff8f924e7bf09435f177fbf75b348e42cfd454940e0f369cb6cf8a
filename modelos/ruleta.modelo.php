@@ -30,9 +30,9 @@ class ModeloRuleta
 		$stmt = null;
 
 	}
-	static public function mdlObtenerFoliosParticipantes($parametro){
+	static public function mdlObtenerFoliosParticipantes(){
 
-		$stmt = Conexion::conectar()->prepare("SELECT bol.id as idBoleto,bol.folioBoleto,bol.idParticipante,CONCAT(part.nombre,' ',part.apellidoPaterno,' ',part.apellidoMaterno) as participante,part.montoAcumulado FROM boletos as bol INNER JOIN participantes as part ON bol.idParticipante = part.id WHERE bol.descartado = 0 and $parametro");
+		$stmt = Conexion::conectar()->prepare("SELECT bol.id as idBoleto,bol.folioBoleto,bol.idParticipante,CONCAT(part.nombre,' ',part.apellidoPaterno,' ',part.apellidoMaterno) as participante,part.montoAcumulado FROM boletos as bol INNER JOIN participantes as part ON bol.idParticipante = part.id WHERE bol.descartado = 0");
 
 		$stmt ->execute();
 

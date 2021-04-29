@@ -7,19 +7,24 @@ function map(a, f){
 	}
 }
 
+function desordenar(){
+	var folios = JSON.parse(localStorage.participantes);
+	folios.sort(function() {return Math.random() - 0.5});
+  	return folios;
+}
+
 var numberOfWinnersPerRound = 1;
 
 function process(){
-	var folios = JSON.parse(localStorage.participantes);
-	
+	var folios = desordenar();
 	imported = [];
     folios.forEach(function (boleto) {
  
-	    imported.push({'folioBoleto':boleto.folioBoleto,'participante':boleto.participante,'idBoleto':boleto.idBoleto,'idParticipante':boleto.idParticipante});
+	    imported.push({'folioBoleto':boleto.folioBoleto,'participante':boleto.participante,'idBoleto':boleto.idBoleto,'idParticipante':boleto.idParticipante,'monto':boleto.montoAcumulado});
 	     
 	});
     
-    var numFromInput = parseInt($('#number-of-winners-input').val(), 10);
+    var numFromInput = parseInt(1, 10);
     if (isNaN(numFromInput) || numFromInput < 1) {
         numberOfWinnersPerRound = 1;
     } else {
@@ -52,16 +57,17 @@ function remainingParticipants() {
 			participants++;
 		}
 	}
+
 	return participants;
 }
 
-function Ticket(idBoleto,folioBoleto,idParticipante,participante,points){
+function Ticket(idBoleto,folioBoleto,idParticipante,participante,monto,points){
 	this.folioBoleto = folioBoleto;
 	if(typeof(points) == "number")
 		this.points = points;
 	else
 		this.points = 1;
-	this.dom = $("<div class='ticket' idBoleto='"+idBoleto+"' folioBoleto='"+folioBoleto+"' idParticipante='"+idParticipante+"' participante='"+participante+"'>").text("#"+folioBoleto);
+	this.dom = $("<div class='ticket' idBoleto='"+idBoleto+"' folioBoleto='"+folioBoleto+"' idParticipante='"+idParticipante+"' participante='"+participante+"' monto='"+monto+"'>").text("#"+folioBoleto);
 	this.fixPosition = function(){
 		var me = this;
 		this.dom.css({
@@ -114,6 +120,7 @@ function standardizedImported() {
 	var namePoints = {};
 	
 	var arreglo = imported;
+	
 	for (var entry of imported) {
 		var points = (entry.points === undefined ? 1 : entry.points);
 		if (entry.folioBoleto in namePoints) {
@@ -125,7 +132,7 @@ function standardizedImported() {
 	imported = [];
 	
 		for (var folioBoleto of arreglo) {
-			imported.push({'idBoleto': folioBoleto["idBoleto"],folioBoleto: folioBoleto["folioBoleto"],'participante': folioBoleto["participante"],'idParticipante': folioBoleto["idParticipante"],points: namePoints[folioBoleto["folioBoleto"]]});
+			imported.push({'idBoleto': folioBoleto["idBoleto"],folioBoleto: folioBoleto["folioBoleto"],'participante': folioBoleto["participante"],'idParticipante': folioBoleto["idParticipante"],'monto':folioBoleto["monto"],points: namePoints[folioBoleto["folioBoleto"]]});
 	
 		}
 	
@@ -139,12 +146,12 @@ var makeTicketsWithPoints = function(){
 	$('.ticket').remove();
 
 	map(removeDuplicateNames(imported), function(tdata){
-	
+		
 		if (tdata.points === undefined) {
 			tdata.points = 1;
 		}
 		if (tdata.points > 0) {
-			var t = new Ticket(tdata.idBoleto,tdata.folioBoleto,tdata.idParticipante,tdata.participante,tdata.points);
+			var t = new Ticket(tdata.idBoleto,tdata.folioBoleto,tdata.idParticipante,tdata.participante,tdata.monto,tdata.points);
 			t.dom.appendTo($('body'));
 			tickets.push(t);
 		}
@@ -172,11 +179,11 @@ var makeTicketsWithPoints = function(){
 				$('#participant-number').css('width', width + 'px'); //keep position consistent during countdown
 				pickName();
 			}
-			else if(vueltas == 3){
+			else if(vueltas == 9){
 				Swal.fire({
 				  icon: 'error',
 				  title: 'Oops...',
-				  text: 'Ya se han realizado los 3 giros',
+				  text: 'Ya se ha realizado la rifa',
 				  
 				})
 				localStorage.setItem("vueltas",0);
@@ -197,11 +204,12 @@ var makeTicketsWithPoints = function(){
 
 var getChoices = function(){
 	var result = [];
-
+	
 	map(tickets, function(ticket){
 		for (var i = 0; i < ticket.points; i++)
 			result.push(ticket)
 	});
+
 	return result;
 }
 
@@ -211,6 +219,7 @@ $(window).resize(function(){
 });
 
 function randomInt(max) {
+
 	return Math.floor(Math.random() * max);
 }
 
@@ -220,6 +229,7 @@ var pickName = function(){
 	$('body').unbind('click');
 	
 	var choices = getChoices();
+
 	if(remainingParticipants() > numberOfWinnersPerRound){
 		var remove = randomInt(choices.length);
 		choices[remove].decrement(choices.length, function(){
@@ -256,6 +266,35 @@ var pickName = function(){
 	        var idBoleto = choices.attr("idBoleto");
 	        var folioBoleto = choices.attr("folioBoleto");
 
+	        switch(vueltas) {
+	        	case 1:
+	        		var premioWinner = "playera.png";
+	        		break;
+	        	case 2:
+	        		var premioWinner = "mochila.png";
+	        		break;
+	        	case 3:
+	        		var premioWinner = "esmeriladora.png";
+	        		break;
+	        	case 4:
+	        		var premioWinner = "playera.png";
+	        		break;
+	        	case 5:
+	        		var premioWinner = "mochila.png";
+	        		break;
+	        	case 6:
+	        		var premioWinner = "pistola-acuspray.png";
+	        		break;
+	        	case 7:
+	        		var premioWinner = "playera.png";
+	        		break;
+	        	case 8:
+	        		var premioWinner = "mochila.png";
+	        		break;
+	        	case 9:
+	        		var premioWinner = "pistola-sagola.png";
+	        		break;
+	        }
             
             choices.click(function(){
 
@@ -291,17 +330,16 @@ var pickName = function(){
 	            
 	             let timerInterval;
 	             Swal.fire({
-				  title: '<h1 style="color:#001781;fontsize:80px">!FELICIDADES!</h1><br> '+participanteGanador+' <br>Has Ganado <br><h2 style="color:#BA007C;fontsize:20px">'+premios[vueltas-1]+'</h2>',
-				
-				  width: 800,
+				  title: '<h3 style="color:#001781;">!FELICIDADES!</h3><br><h2 style="color:#BA007C;">'+participanteGanador+'</h2><br>Ganaste<br><img src="vistas/modulos/images/'+premioWinner+'" width="40%"></img>',
+				  width: 900,
 				  padding: '3em',
 				  background: '#fff',
 				  backdrop: `
 				    rgba(0,0,123,0.4)
-				    url("http://www.gifmania.com/Gif-Animados-Objetos/Imagenes-Juguetes/Globos/Globos-Colores-Volando-84851.gif")
+				    url("http://pa1.narvii.com/6542/c24963bf35f44ac2958de0a5865de931afe77e97_00.gif")
 				    
 				  `,
-				   timer: 4000,
+				   timer: 10000,
 				  timerProgressBar: true,
 				  didOpen: () => {
 				    Swal.showLoading()
@@ -313,7 +351,7 @@ var pickName = function(){
 				          b.textContent = Swal.getTimerLeft()
 				        }
 				      }
-				    }, 100)
+				    }, 10000)
 				  },
 				  willClose: () => {
 				    clearInterval(timerInterval)
@@ -329,8 +367,9 @@ var pickName = function(){
             
                 
             });
-            choices.animate({'font-size':60 +'px','top':(window.innerHeight/5) + 'px','left':(window.innerWidth/2 - width) + 'px'},1500, function(){
-                choices.animate({'left':(window.innerWidth/2 - choices.width()/2) + 'px'}, 'slow');
+            choices.addClass('ticketWinner');
+            choices.animate({'width':'400'+'px','height':'200'+'px','font-size':110 +'px','top':(window.innerHeight/5) + 'px','left':(window.innerWidth/2 - width) + 'px'},1500, function(){
+                choices.animate({'left':40 + '%'}, 'slow');
             });
             
         } else {

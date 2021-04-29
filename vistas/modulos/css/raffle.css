@@ -1,53 +1,65 @@
 
 .ticket {
-	font-family: "Verdana";
+
 	display:inline-block;
-	font-size: 35px;
+	font-size: 25px;
 	background-color: #001D7E;
 	color: white;
-	padding: 50px;
-	margin:5px;
+	padding: 10px;
+	margin:2px;
 	text-shadow: 0px 1px 1px #999;
 	font-weight: bold;
 	box-sizing: border-box;
 	border-radius: 16px;
 	transition: background .5s;
 	-webkit-transition: background .5s;
-	
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select:none;
+	-khtml-user-select:none;
+	 text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9,
+	  0 3px 0 #bbb,
+	  0 4px 0 #b9b9b9,
+	  0 5px 0 #aaa,
+	  0 6px 1px rgba(0,0,0,.1),
+	  0 0 5px rgba(0,0,0,.1),
+	  0 1px 3px rgba(0,0,0,.3),
+	  0 3px 5px rgba(0,0,0,.2),
+	  0 5px 10px rgba(0,0,0,.25),
+	  0 10px 10px rgba(0,0,0,.2),
+	  0 20px 20px rgba(0,0,0,.15);
+
+}
+
+.ticket {
+	background-color: #001D7E;
+	height: 90px;
+	width: 130px;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select:none;
 	-khtml-user-select:none;
 }
 
-.ticket {
-	background-color: #001D7E;
-	height: 100px;
-	width: 180px;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select:none;
-	-khtml-user-select:none;
-}
-.ticket:before {
+.ticketWinner:before {
 	background: #fff;
 	border-radius: 50%;
 	box-shadow: 
-	300px 0 0 0 #fff, 
+	400px 0 0 0 #fff, 
 	0 180px 0 0 #fff, 
-	300px 180px 0 0 #fff,
+	400px 180px 0 0 #fff,
 	0 40px 0 -20px #fff,
 	0 60px 0 -20px #fff,
 	0 80px 0 -20px #fff,
 	0 100px 0 -20px #fff,
 	0 120px 0 -20px #fff,
 	0 140px 0 -20px #fff,
-	300px 40px 0 -20px #fff,
-	300px 60px 0 -20px #fff,
-	300px 80px 0 -20px #fff,
-	300px 100px 0 -20px #fff,
-	300px 120px 0 -20px #fff,
-	300px 140px 0 -20px #fff;
+	400px 40px 0 -20px #fff,
+	400px 60px 0 -20px #fff,
+	400px 80px 0 -20px #fff,
+	400px 100px 0 -20px #fff,
+	400px 120px 0 -20px #fff,
+	400px 140px 0 -20px #fff;
 	content: "";
 	display: block;
 	height: 50px;

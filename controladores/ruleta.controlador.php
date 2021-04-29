@@ -17,9 +17,9 @@ class ControladorRuleta
 
 		return $respuesta;
 	}
-	static public function ctrObtenerFoliosParticipantes($parametro){
+	static public function ctrObtenerFoliosParticipantes(){
 
-		$respuesta = ModeloRuleta::mdlObtenerFoliosParticipantes($parametro);
+		$respuesta = ModeloRuleta::mdlObtenerFoliosParticipantes();
 
 		return $respuesta;
 

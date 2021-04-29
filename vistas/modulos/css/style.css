@@ -132,7 +132,7 @@ h6, .h6 {
   background: #BA007C !important;
 }
 
-.btn-primary:hover {
+.btn-primary:buttonIniciar {
   background: #BA007C;
 }
 
@@ -471,20 +471,13 @@ textarea.form-control {
   }
 }
 
-.navbar .nav-item .nav-link {
-  /*font-family: "Attractype-Reborn";*/
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  padding: 25px;
-  font-size: 18px;
-}
 
-.navbar .nav-item.active {
-  font-weight: bold;
-}
 
 .navbar-dark .navbar-nav .nav-link {
   color: #fff;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: white;
 }
 
 .hero-area {
@@ -980,4 +973,60 @@ blockquote {
 @keyframes escribir {
   from { width: 100% }
   to { width:0 }
+}
+.button::after, .button::before {
+  position: absolute;
+  content: "";
+  transition: all 0.5s;
+}
+
+.button {
+  display: inline-block;
+  padding: 20px 40px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  vertical-align: middle;
+  font-family: 'Attractype-Reborn';
+  text-decoration: none;
+  font-size: 4vw;
+  transition: all 0.5s;
+  background-color: #3498db;
+}
+.button:hover{
+  color: #BA007C;
+
+
+}
+.button::before {
+  bottom: -15px;
+  height: 15px;
+  width: 100%;
+  left: 8px;
+  transform: skewX(45deg);
+  background-color: #196090;
+}
+.button::after {
+  right: -15px;
+  height: 100%;
+  width: 15px;
+  bottom: -8px;
+  transform: skewY(45deg);
+  background-color: #124364;
+}
+.button:active {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.button:active::before {
+  bottom: -5px;
+  height: 5px;
+  left: 3px;
+}
+.button:active::after {
+  right: -5px;
+  width: 5px;
+  bottom: -3px;
 }

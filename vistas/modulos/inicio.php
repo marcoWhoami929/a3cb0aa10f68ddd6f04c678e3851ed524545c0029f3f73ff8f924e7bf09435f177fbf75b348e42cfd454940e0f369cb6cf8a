@@ -10,6 +10,7 @@ $facturas = $obtenerEstadisticas[2][0];
     <div class="row">
       <div class="col-lg-12 mx-auto text-center" id="textInicio">
         <center><h2 class="text-white font-tertiary" >LA GRAN RIFA ESTA POR COMENZAR<span>&#160;</span></h2></center>
+       
       </div>
     
     </div>
@@ -41,7 +42,7 @@ $facturas = $obtenerEstadisticas[2][0];
 
        <div class="col-12 text-center">
         <h1 class="section-title text-white mb-5" id="tiempo"></h1>
-        
+          <a class="button" id="indicadorPremio" idPremio="3" style="display: none;margin-top: -160px" href="#">COMENZAR</a>
       </div>
     </div>
   </div>
@@ -103,6 +104,8 @@ $facturas = $obtenerEstadisticas[2][0];
 
   <img class="img-fluid edu-bg-image " src="vistas/modulos/images/background.png" alt="bg-image">
 </section>
+
+<!--
 <div class="modal fade" id="iniciarRifa" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -184,6 +187,7 @@ $facturas = $obtenerEstadisticas[2][0];
     </div>
   </div>
 </div>
+
 <style type="text/css" media="screen">
 
 
@@ -391,3 +395,4 @@ right: 0;
     
 }
   </style>
+-->
