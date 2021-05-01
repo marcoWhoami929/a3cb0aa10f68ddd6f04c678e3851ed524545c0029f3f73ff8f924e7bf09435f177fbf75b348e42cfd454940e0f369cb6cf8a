@@ -42,7 +42,7 @@ $facturas = $obtenerEstadisticas[2][0];
 
        <div class="col-12 text-center">
         <h1 class="section-title text-white mb-5" id="tiempo"></h1>
-          <a class="button" id="indicadorPremio" idPremio="3" style="display: none;margin-top: -160px" href="#">COMENZAR</a>
+          <a class="button" id="indicadorPremio" idPremio="3" style="display: none;margin-top: -0px" href="#"><span id="textoComenzar">COMENZAMOS</span></a>
       </div>
     </div>
   </div>

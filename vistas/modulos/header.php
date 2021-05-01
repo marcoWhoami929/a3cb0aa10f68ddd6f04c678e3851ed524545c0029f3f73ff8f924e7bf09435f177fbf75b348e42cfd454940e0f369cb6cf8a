@@ -9,11 +9,11 @@
     <div class="collapse navbar-collapse text-center" id="navigation">
       <ul class="navbar-nav ml-auto" id="menuPremios">
         <li class="nav-item">
-          <a class="nav-link"><b style="color:transparent" id="participant-number"></b></a>
+          <a class="nav-link not-active"><b style="color:transparent" id="participant-number"></b></a>
         </li>
         <li class="nav-item">
           
-          <a class="nav-link buttonIniciar" id="iniciarRifa" style="display: none">COMENZAR</a>
+          <a class="nav-link buttonIniciar" id="iniciarRifa" style="display: none" >COMENZAR</a>
         </li>
 
         <!--
@@ -77,5 +77,11 @@
   right: -5px;
   width: 5px;
   bottom: -3px;
+}
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: black;
 }
 </style>

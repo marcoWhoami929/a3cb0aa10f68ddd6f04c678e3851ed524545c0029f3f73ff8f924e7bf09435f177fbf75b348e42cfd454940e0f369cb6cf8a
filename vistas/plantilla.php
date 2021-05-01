@@ -70,7 +70,7 @@ session_start();
 
     <!-- Main Script -->
     <script src="vistas/modulos/js/script.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="vistas/modulos/js/swal-min.js"></script>
 
     <?php
       if (isset($_GET["ruta"])) {

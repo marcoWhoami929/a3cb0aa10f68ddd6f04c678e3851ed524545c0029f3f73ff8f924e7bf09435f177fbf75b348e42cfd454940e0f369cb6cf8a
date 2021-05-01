@@ -11,9 +11,9 @@ $("#indicadorPremio").on("click",function(event){
 	var datos = new FormData();
 	datos.append('idPremio',idPremio);
 
-	let premio1 = ['Playera','Mochila','PISTOLA SAGOLA 4600 XTREME'];
-	let premio2 = ['Playera','Mochila','PISTOLA ACUSPRAY 07HS-PRO'];
-	let premio3 = ['Playera','Mochila','ESMERILADORA 3M FILE BELT SANDER 28366 6 HP MOTOR 14-9/16'];
+	let premio1 = ['Mochila','Mochila','PISTOLA SAGOLA 4600 XTREME'];
+	let premio2 = ['Mochila','Mochila','PISTOLA ACUSPRAY 07HS-PRO'];
+	let premio3 = ['Mochila','Mochila','ESMERILADORA 3M FILE BELT SANDER 28366 6 HP MOTOR 14-9/16'];
 	
 	let premiosData = [premio3,premio2,premio1];
 	localStorage.setItem("premios",premiosData);

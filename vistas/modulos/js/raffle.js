@@ -172,6 +172,8 @@ var makeTicketsWithPoints = function(){
 			ticket.fixPosition();
 		});
 		$('#iniciarRifa').unbind('click').click(function(){
+	
+			$("#iniciarRifa").addClass('not-active');
 			var vueltas = localStorage.vueltas;
 			if (vueltas == 0) {
 				localStorage.setItem("vueltas",1);
@@ -268,7 +270,7 @@ var pickName = function(){
 
 	        switch(vueltas) {
 	        	case 1:
-	        		var premioWinner = "playera.png";
+	        		var premioWinner = "mochila.png";
 	        		break;
 	        	case 2:
 	        		var premioWinner = "mochila.png";
@@ -277,7 +279,7 @@ var pickName = function(){
 	        		var premioWinner = "esmeriladora.png";
 	        		break;
 	        	case 4:
-	        		var premioWinner = "playera.png";
+	        		var premioWinner = "mochila.png";
 	        		break;
 	        	case 5:
 	        		var premioWinner = "mochila.png";
@@ -286,7 +288,7 @@ var pickName = function(){
 	        		var premioWinner = "pistola-acuspray.png";
 	        		break;
 	        	case 7:
-	        		var premioWinner = "playera.png";
+	        		var premioWinner = "mochila.png";
 	        		break;
 	        	case 8:
 	        		var premioWinner = "mochila.png";
@@ -297,7 +299,7 @@ var pickName = function(){
 	        }
             
             choices.click(function(){
-
+            	$("#iniciarRifa").removeClass('not-active');
 	          /*
 	          	var datos2 = new FormData();
 	            datos2.append("idParticipanteDescartado",idParticipante);
@@ -380,7 +382,7 @@ var pickName = function(){
                 $(c.dom).css('background', '#EE8800');
             });
             $('#iniciarRifa').click(() => {
-                //makeTicketsWithPoints();
+                makeTicketsWithPoints();
             });
         }
 	}

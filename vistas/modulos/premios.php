@@ -29,6 +29,7 @@
 <script>
 
   $(document).ready(function(){
+         document.getElementById("iniciarRifa").style.display = "none";
     $('#button-success').trigger('click');
     $('.navigation').addClass('nav-bg');
 
