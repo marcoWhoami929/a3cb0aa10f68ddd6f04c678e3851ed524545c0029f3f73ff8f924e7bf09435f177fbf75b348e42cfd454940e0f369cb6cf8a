@@ -26,6 +26,89 @@
     </div>
   </div>
 </section>
+<div class="modal fade" id="ganadoresRifa" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+          
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                
+                          <div class='ticket'>
+                            <div class='datas'>
+                              <a class='link'>
+                                <div class='ribbon'>
+                                  <div class='label'>3</div>
+                                </div>
+                                <h4>Premio</h4>
+                                 <a href="premios" class="indicadorPremio" idPremio="3"><img src="vistas/modulos/images/esmeriladora.png" alt="bg-shape" width="50%"></a>
+                                <strong></strong>
+                                <em></em>
+                              </a>
+                            </div>
+                            <a class='button'></a>
+                          </div>
+                 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+               
+                          <div class='ticket'>
+                            <div class='datas'>
+                              <a class='link'>
+                                <div class='ribbon'>
+                                  <div class='label'>2</div>
+                                </div>
+                                <h4>Premio</h4>
+                                  <a href="premios" class="indicadorPremio" idPremio="2"><img src="vistas/modulos/images/pistola-acuspray.png" alt="bg-shape" width="50%"></a>
+                                <strong></strong>
+                                <em></em>
+                              </a>
+                            </div>
+                            <a class='button'></a>
+                          </div>
+               
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                
+                          <div class='ticket'>
+                            <div class='datas'>
+                              <a class='link'>
+                                <div class='ribbon'>
+                                  <div class='label'>1</div>
+                                </div>
+                                <h4>Premio</h4>
+                                <a href="premios" class="indicadorPremio" idPremio="1"><img src="vistas/modulos/images/pistola-sagola.png" alt="bg-shape" width="50%"></a>
+                                <strong></strong>
+                                <em></em>
+                              </a>
+                            </div>
+                            <a class='button'></a>
+                          </div>
+                 
+              </div>
+              
+           
+            
+          </div>
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Minimizar</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
 
   $(document).ready(function(){

@@ -18,12 +18,13 @@ var numberOfWinnersPerRound = 1;
 function process(){
 	var folios = desordenar();
 	imported = [];
+	
     folios.forEach(function (boleto) {
  
 	    imported.push({'folioBoleto':boleto.folioBoleto,'participante':boleto.participante,'idBoleto':boleto.idBoleto,'idParticipante':boleto.idParticipante,'monto':boleto.montoAcumulado});
 	     
 	});
-    
+
     var numFromInput = parseInt(1, 10);
     if (isNaN(numFromInput) || numFromInput < 1) {
         numberOfWinnersPerRound = 1;
@@ -119,7 +120,9 @@ var removeDuplicateNames = function(data){
 function standardizedImported() {
 	var namePoints = {};
 	
-	var arreglo = imported;
+	var arreglo = desordenar();
+
+
 	
 	for (var entry of imported) {
 		var points = (entry.points === undefined ? 1 : entry.points);
@@ -132,11 +135,12 @@ function standardizedImported() {
 	imported = [];
 	
 		for (var folioBoleto of arreglo) {
-			imported.push({'idBoleto': folioBoleto["idBoleto"],folioBoleto: folioBoleto["folioBoleto"],'participante': folioBoleto["participante"],'idParticipante': folioBoleto["idParticipante"],'monto':folioBoleto["monto"],points: namePoints[folioBoleto["folioBoleto"]]});
+			imported.push({'idBoleto': folioBoleto["idBoleto"],folioBoleto: folioBoleto["folioBoleto"],'participante': folioBoleto["participante"],'idParticipante': folioBoleto["idParticipante"],'monto':folioBoleto["montoAcumulado"],points: namePoints[folioBoleto["folioBoleto"]]});
 	
 		}
-	
+    console.log(imported);
 	return imported;
+
 }
 
 var makeTicketsWithPoints = function(){
@@ -263,7 +267,7 @@ var pickName = function(){
 
             var participanteGanador = choices.attr("participante");
 	        var idParticipante = choices.attr("idParticipante");
-	        var numeroPremio = localStorage.numeroPremio;
+	        
 	        var premio = premios[vueltas-1];
 	        var idBoleto = choices.attr("idBoleto");
 	        var folioBoleto = choices.attr("folioBoleto");
@@ -271,102 +275,97 @@ var pickName = function(){
 	        switch(vueltas) {
 	        	case 1:
 	        		var premioWinner = "mochila.png";
+	        		var numeroPremio = 3;
 	        		break;
 	        	case 2:
 	        		var premioWinner = "mochila.png";
+	        		var numeroPremio = 3;
 	        		break;
 	        	case 3:
 	        		var premioWinner = "esmeriladora.png";
+	        		var numeroPremio = 3;
 	        		break;
 	        	case 4:
 	        		var premioWinner = "mochila.png";
+	        		var numeroPremio = 2;
 	        		break;
 	        	case 5:
 	        		var premioWinner = "mochila.png";
+	        		var numeroPremio = 2;
 	        		break;
 	        	case 6:
 	        		var premioWinner = "pistola-acuspray.png";
+	        		var numeroPremio = 2;
 	        		break;
 	        	case 7:
 	        		var premioWinner = "mochila.png";
+	        		var numeroPremio = 1;
 	        		break;
 	        	case 8:
 	        		var premioWinner = "mochila.png";
+	        		var numeroPremio = 1;
 	        		break;
 	        	case 9:
 	        		var premioWinner = "pistola-sagola.png";
+	        		var numeroPremio = 1;
 	        		break;
 	        }
-            
+           
             choices.click(function(){
             	$("#iniciarRifa").removeClass('not-active');
-	          /*
-	          	var datos2 = new FormData();
-	            datos2.append("idParticipanteDescartado",idParticipante);
-	            datos2.append("idBoletoDescartado",idBoleto);
-	            datos2.append("folioBoletoDescartado",folioBoleto);
-	            datos2.append("numPremioDescartado",numeroPremio);
-	            datos2.append("premioDescartado",premio);
-	             $.ajax({
-			      url:"ajax/ruleta.ajax.php",
-			      method: "POST",
-			      data: datos2,
-			      cache: false,
-			      contentType: false,
-			      processData: false,
-			      dataType: "json",
-			      success: function(respuesta){ 
-			        	var response = respuesta;
-			             var responseFinal = response.replace(/['"]+/g, '');
-			             if (responseFinal == "ok") { 
-			             	alert("registrado");
-			            
-			             } else{
-			             	alert("error");
-			             }
-			        	
-			      }
-			  
-			    })
-			    */
+	          
+	          	  $.post('ajax/ruleta.ajax.php', {
+	             		"idParticipanteDescartado":idParticipante,
+						"idBoletoDescartado":idBoleto,
+						"folioBoletoDescartado":folioBoleto,
+						"numPremioDescartado":numeroPremio,
+						"premioDescartado":premio
+			             
+			            },function(data) {
+
+			            	 let timerInterval;
+				             Swal.fire({
+							  title: '<h3 style="color:#001781;">!FELICIDADES!</h3><br><h2 style="color:#BA007C;">'+participanteGanador+'</h2><br>Ganaste<br><img src="vistas/modulos/images/'+premioWinner+'" width="40%"></img>',
+							  width: 900,
+							  padding: '3em',
+							  background: '#fff',
+							  backdrop: `
+							    rgba(0,0,123,0.4)
+							    url("http://pa1.narvii.com/6542/c24963bf35f44ac2958de0a5865de931afe77e97_00.gif")
+							    
+							  `,
+							   timer: 10000,
+							  timerProgressBar: true,
+							  didOpen: () => {
+							    Swal.showLoading()
+							    timerInterval = setInterval(() => {
+							      const content = Swal.getContent()
+							      if (content) {
+							        const b = content.querySelector('b')
+							        if (b) {
+							          b.textContent = Swal.getTimerLeft()
+							        }
+							      }
+							    }, 10000)
+							  },
+							  willClose: () => {
+							    clearInterval(timerInterval)
+							     inProgress = false;
+			                choices.animate({'font-size':fontsize,'top':top,'left':left},'slow');
+			                $('.ticket').show(500).unbind('click');
+			                setTimeout(function(){
+			                    makeTicketsWithPoints();
+			                }, 700);
+							  }
+							})
+			             
+			          });
+
+			    
+	            /*
 	            
-	             let timerInterval;
-	             Swal.fire({
-				  title: '<h3 style="color:#001781;">!FELICIDADES!</h3><br><h2 style="color:#BA007C;">'+participanteGanador+'</h2><br>Ganaste<br><img src="vistas/modulos/images/'+premioWinner+'" width="40%"></img>',
-				  width: 900,
-				  padding: '3em',
-				  background: '#fff',
-				  backdrop: `
-				    rgba(0,0,123,0.4)
-				    url("http://pa1.narvii.com/6542/c24963bf35f44ac2958de0a5865de931afe77e97_00.gif")
-				    
-				  `,
-				   timer: 10000,
-				  timerProgressBar: true,
-				  didOpen: () => {
-				    Swal.showLoading()
-				    timerInterval = setInterval(() => {
-				      const content = Swal.getContent()
-				      if (content) {
-				        const b = content.querySelector('b')
-				        if (b) {
-				          b.textContent = Swal.getTimerLeft()
-				        }
-				      }
-				    }, 10000)
-				  },
-				  willClose: () => {
-				    clearInterval(timerInterval)
-				     inProgress = false;
-                choices.animate({'font-size':fontsize,'top':top,'left':left},'slow');
-                $('.ticket').show(500).unbind('click');
-                setTimeout(function(){
-                    makeTicketsWithPoints();
-                }, 700);
-				  }
-				})
 	             
-            
+            	*/
                 
             });
             choices.addClass('ticketWinner');

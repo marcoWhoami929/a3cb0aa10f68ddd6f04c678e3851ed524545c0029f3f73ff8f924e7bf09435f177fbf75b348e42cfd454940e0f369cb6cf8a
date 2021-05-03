@@ -20,7 +20,7 @@ class AjaxRuleta{
 
 	public function ajaxGuardarDescartados(){
 
-		$tabla = "descartados";
+		$tabla = "ganadores";
 		$datos  = array('idParticipante' => $this->idParticipanteDescartado,
 						'idBoleto' => $this->idBoletoDescartado,
 						'folioBoleto' => $this->folioBoletoDescartado,

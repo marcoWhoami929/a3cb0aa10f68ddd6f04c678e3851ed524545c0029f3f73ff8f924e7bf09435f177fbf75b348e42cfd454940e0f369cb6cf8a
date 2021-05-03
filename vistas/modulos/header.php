@@ -9,11 +9,12 @@
     <div class="collapse navbar-collapse text-center" id="navigation">
       <ul class="navbar-nav ml-auto" id="menuPremios">
         <li class="nav-item">
-          <a class="nav-link not-active"><b style="color:transparent" id="participant-number"></b></a>
+          <a class="nav-link not-active"><b style="color:red" id="participant-number"></b></a>
         </li>
         <li class="nav-item">
           
           <a class="nav-link buttonIniciar" id="iniciarRifa" style="display: none" >COMENZAR</a>
+        
         </li>
 
         <!--

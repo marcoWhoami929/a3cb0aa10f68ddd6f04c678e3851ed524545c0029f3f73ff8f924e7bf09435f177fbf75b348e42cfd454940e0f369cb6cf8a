@@ -4,7 +4,7 @@ FUNCION PARA ELEIMINAR ELEMENTO DE ARREGLO PARTICIPANTES
 
 $("#indicadorPremio").on("click",function(event){
 	var idPremio = $(this).attr("idPremio");
-	localStorage.setItem("numeroPremio",idPremio);
+	
 
 	event.preventDefault();
 	
