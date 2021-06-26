@@ -63,6 +63,7 @@ session_start();
     
     <!-- Bootstrap JS -->
     <script src="vistas/modulos/plugins/bootstrap/bootstrap.min.js"></script>
+  
     <!-- slick slider -->
     <script src="vistas/modulos/plugins/slick/slick.min.js"></script>
     <!-- filter -->

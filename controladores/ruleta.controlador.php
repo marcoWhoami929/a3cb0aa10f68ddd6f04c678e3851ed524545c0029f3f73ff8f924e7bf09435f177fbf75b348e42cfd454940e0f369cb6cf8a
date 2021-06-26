@@ -33,6 +33,14 @@ class ControladorRuleta
 
 
 	}
+	static public function ctrMostrarGanadores(){
+
+		$respuesta = ModeloRuleta::mdlMostrarGanadores();
+
+		return $respuesta;
+
+
+	}
 	
 
 

@@ -69,6 +69,19 @@ class ModeloRuleta
 		$stmt = null;
 
 	}
+	static public function mdlMostrarGanadores(){
+
+		$stmt = Conexion::conectar()->prepare("SELECT CONCAT(par.nombre,' ',par.apellidoPaterno,' ',par.apellidoMaterno) as nombre,gan.folioBoleto,gan.premio,gan.numPremio FROM `ganadores` as gan INNER JOIN participantes as par ON gan.idParticipante = par.id");
+
+		$stmt ->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+		$stmt = null;
+
+	}
 	
 }
 

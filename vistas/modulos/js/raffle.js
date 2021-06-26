@@ -16,6 +16,7 @@ function desordenar(){
 var numberOfWinnersPerRound = 1;
 
 function process(){
+    //$("#ganadoresRifa").modal("show");
 	var folios = desordenar();
 	imported = [];
 	
@@ -53,6 +54,7 @@ $(document).ready(function(){
 
 function remainingParticipants() {
 	var participants = 0;
+	var tickets = getChoices();
 	for (var ticket of tickets) {
 		if (ticket.points > 0) {
 			participants++;
@@ -71,6 +73,7 @@ function Ticket(idBoleto,folioBoleto,idParticipante,participante,monto,points){
 	this.dom = $("<div class='ticket' idBoleto='"+idBoleto+"' folioBoleto='"+folioBoleto+"' idParticipante='"+idParticipante+"' participante='"+participante+"' monto='"+monto+"'>").text("#"+folioBoleto);
 	this.fixPosition = function(){
 		var me = this;
+
 		this.dom.css({
 			'position':'absolute',
 			'top': me.dom.offset().top,
@@ -121,8 +124,6 @@ function standardizedImported() {
 	var namePoints = {};
 	
 	var arreglo = desordenar();
-
-
 	
 	for (var entry of imported) {
 		var points = (entry.points === undefined ? 1 : entry.points);
@@ -135,10 +136,11 @@ function standardizedImported() {
 	imported = [];
 	
 		for (var folioBoleto of arreglo) {
+
 			imported.push({'idBoleto': folioBoleto["idBoleto"],folioBoleto: folioBoleto["folioBoleto"],'participante': folioBoleto["participante"],'idParticipante': folioBoleto["idParticipante"],'monto':folioBoleto["montoAcumulado"],points: namePoints[folioBoleto["folioBoleto"]]});
 	
 		}
-    console.log(imported);
+    
 	return imported;
 
 }
@@ -149,15 +151,19 @@ var makeTicketsWithPoints = function(){
 	tickets = [];
 	$('.ticket').remove();
 
-	map(removeDuplicateNames(imported), function(tdata){
+	map(imported, function(tdata){
 		
 		if (tdata.points === undefined) {
 			tdata.points = 1;
 		}
+
 		if (tdata.points > 0) {
 			var t = new Ticket(tdata.idBoleto,tdata.folioBoleto,tdata.idParticipante,tdata.participante,tdata.monto,tdata.points);
 			t.dom.appendTo($('body'));
+			
 			tickets.push(t);
+			
+			
 		}
     });
 
@@ -168,7 +174,7 @@ var makeTicketsWithPoints = function(){
     }
 
 	tickets.reverse();
-	size = 40;
+	size = 20;
 	$('.ticket').css('font-size', size + 'px');
 	
 	setTimeout(function() {
@@ -182,6 +188,7 @@ var makeTicketsWithPoints = function(){
 			if (vueltas == 0) {
 				localStorage.setItem("vueltas",1);
 				var width = $('#participant-number').text(tickets.length + '/' + tickets.length).width();
+
 				$('#participant-number').css('width', width + 'px'); //keep position consistent during countdown
 				pickName();
 			}
@@ -211,9 +218,90 @@ var makeTicketsWithPoints = function(){
 var getChoices = function(){
 	var result = [];
 	
+
 	map(tickets, function(ticket){
 		for (var i = 0; i < ticket.points; i++)
-			result.push(ticket)
+			var vueltas = localStorage.vueltas*1;
+			switch(vueltas) {
+	        	case 1:
+	        		
+	        		var numeroPremio = 3;
+	        		var filter1 =1;
+	        		var filter2 = 4999;
+	        		break;
+	        	case 2:
+	        		
+	        		var numeroPremio = 3;
+	        		var filter1 = 1;
+	        		var filter2 = 4999;
+	        		break;
+	        	case 3:
+	        		
+	        		var numeroPremio = 3;
+	        		var filter1 = 1;
+	        		var filter2 = 4999;
+	        		break;
+	        	case 4:
+	        		
+	        		var numeroPremio = 2;
+	        		var filter1 = 5000;
+	        		var filter2 = 9999;
+	        		break;
+	        	case 5:
+	        		
+	        		var numeroPremio = 2;
+	        		var filter1 = 5000;
+	        		var filter2 = 9999;
+	        		break;
+	        	case 6:
+	        		
+	        		var numeroPremio = 2;
+	        		var filter1 = 5000;
+	        		var filter2 = 9999;
+	        		break;
+	        	case 7:
+	        		
+	        		var numeroPremio = 1;
+	        		var filter1 = 10000;
+	        		var filter2 = 100000;
+	        		break;
+	        	case 8:
+	        		
+	        		var numeroPremio = 1;
+	        		var filter1 = 10000;
+	        		var filter2 = 100000;
+	        		break;
+	        	case 9:
+	        		
+	        		var numeroPremio = 1;
+	        		var filter1 = 10000;
+	        		var filter2 = 100000;
+	        		break;
+	        }
+	        var montoTicket = ticket.dom[0].attributes[5].value;
+	        if (numeroPremio == 3) {
+	        	if(montoTicket >= filter1 && montoTicket <= filter2){
+	        	result.push(ticket)
+	       		 }else{
+
+	       		 }
+	        }else if (numeroPremio == 2) {
+	        	if(montoTicket >= filter1 && montoTicket <= filter2){
+	        	result.push(ticket)
+	       		 }else{
+	       		 	
+	       		 }
+	        }else if (numeroPremio == 1) {
+	        	if(montoTicket >= filter1 && montoTicket <= filter2){
+	        	result.push(ticket)
+	       		 }else{
+	       		 	
+	       		 }
+	        }
+	        
+			
+
+			
 	});
 
 	return result;
@@ -235,6 +323,7 @@ var pickName = function(){
 	$('body').unbind('click');
 	
 	var choices = getChoices();
+	
 
 	if(remainingParticipants() > numberOfWinnersPerRound){
 		var remove = randomInt(choices.length);
@@ -242,6 +331,7 @@ var pickName = function(){
 			pickName();
 		});
 	} else {
+			
 		if (removeWinners) {
 			
             choices.forEach(choice => {
@@ -274,11 +364,11 @@ var pickName = function(){
 
 	        switch(vueltas) {
 	        	case 1:
-	        		var premioWinner = "mochila.png";
+	        		var premioWinner = "mochila-sw.png";
 	        		var numeroPremio = 3;
 	        		break;
 	        	case 2:
-	        		var premioWinner = "mochila.png";
+	        		var premioWinner = "mochila-sw.png";
 	        		var numeroPremio = 3;
 	        		break;
 	        	case 3:
@@ -286,11 +376,11 @@ var pickName = function(){
 	        		var numeroPremio = 3;
 	        		break;
 	        	case 4:
-	        		var premioWinner = "mochila.png";
+	        		var premioWinner = "mochila-sw.png";
 	        		var numeroPremio = 2;
 	        		break;
 	        	case 5:
-	        		var premioWinner = "mochila.png";
+	        		var premioWinner = "mochila-sw.png";
 	        		var numeroPremio = 2;
 	        		break;
 	        	case 6:
@@ -298,11 +388,11 @@ var pickName = function(){
 	        		var numeroPremio = 2;
 	        		break;
 	        	case 7:
-	        		var premioWinner = "mochila.png";
+	        		var premioWinner = "mochila-sw.png";
 	        		var numeroPremio = 1;
 	        		break;
 	        	case 8:
-	        		var premioWinner = "mochila.png";
+	        		var premioWinner = "mochila-sw.png";
 	        		var numeroPremio = 1;
 	        		break;
 	        	case 9:
@@ -354,7 +444,15 @@ var pickName = function(){
 			                choices.animate({'font-size':fontsize,'top':top,'left':left},'slow');
 			                $('.ticket').show(500).unbind('click');
 			                setTimeout(function(){
-			                    makeTicketsWithPoints();
+			                	if (vueltas == 9) {
+			                		makeTicketsWithPoints();
+			                		//$("#ganadoresRifa").modal('show');
+			                	}else{
+
+			                		  makeTicketsWithPoints();
+
+			                	}
+			                  
 			                }, 700);
 							  }
 							})
@@ -369,7 +467,7 @@ var pickName = function(){
                 
             });
             choices.addClass('ticketWinner');
-            choices.animate({'width':'400'+'px','height':'200'+'px','font-size':110 +'px','top':(window.innerHeight/5) + 'px','left':(window.innerWidth/2 - width) + 'px'},1500, function(){
+            choices.animate({'z-index':'1001','width':'400'+'px','height':'200'+'px','font-size':110 +'px','top':(window.innerHeight/5) + 'px','left':(window.innerWidth/2 - width) + 'px'},1500, function(){
                 choices.animate({'left':40 + '%'}, 'slow');
             });
             
@@ -381,7 +479,7 @@ var pickName = function(){
                 $(c.dom).css('background', '#EE8800');
             });
             $('#iniciarRifa').click(() => {
-                makeTicketsWithPoints();
+                //makeTicketsWithPoints();
             });
         }
 	}

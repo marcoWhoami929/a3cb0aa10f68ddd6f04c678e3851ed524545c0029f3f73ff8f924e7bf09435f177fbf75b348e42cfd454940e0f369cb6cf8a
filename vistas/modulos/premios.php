@@ -1,4 +1,7 @@
-
+<?php 
+require_once "controladores/ruleta.controlador.php";
+require_once "modelos/ruleta.modelo.php";
+?>
 <section class="section pt-5">
   <div class="container">
     <div class="row">
@@ -26,8 +29,8 @@
     </div>
   </div>
 </section>
-<div class="modal fade" id="ganadoresRifa" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+<div class="modal fade modal-fullscreen" id="ganadoresRifa" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document"> 
     <div class="modal-content">
       <div class="modal-header">
         
@@ -38,60 +41,15 @@
       <div class="modal-body">
         <div class="container">
           <div class="row">
-          
-              <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="col-lg-12"><span id="textoModal">FELICIDADES A TODOS LOS GANADORES</span></div>
+              <div class="col-lg-12">
+                <?php
+                $obtenerGanadores =  ControladorRuleta::ctrMostrarGanadores();
                 
-                          <div class='ticket'>
-                            <div class='datas'>
-                              <a class='link'>
-                                <div class='ribbon'>
-                                  <div class='label'>3</div>
-                                </div>
-                                <h4>Premio</h4>
-                                 <a href="premios" class="indicadorPremio" idPremio="3"><img src="vistas/modulos/images/esmeriladora.png" alt="bg-shape" width="50%"></a>
-                                <strong></strong>
-                                <em></em>
-                              </a>
-                            </div>
-                            <a class='button'></a>
-                          </div>
-                 
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-               
-                          <div class='ticket'>
-                            <div class='datas'>
-                              <a class='link'>
-                                <div class='ribbon'>
-                                  <div class='label'>2</div>
-                                </div>
-                                <h4>Premio</h4>
-                                  <a href="premios" class="indicadorPremio" idPremio="2"><img src="vistas/modulos/images/pistola-acuspray.png" alt="bg-shape" width="50%"></a>
-                                <strong></strong>
-                                <em></em>
-                              </a>
-                            </div>
-                            <a class='button'></a>
-                          </div>
-               
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                
-                          <div class='ticket'>
-                            <div class='datas'>
-                              <a class='link'>
-                                <div class='ribbon'>
-                                  <div class='label'>1</div>
-                                </div>
-                                <h4>Premio</h4>
-                                <a href="premios" class="indicadorPremio" idPremio="1"><img src="vistas/modulos/images/pistola-sagola.png" alt="bg-shape" width="50%"></a>
-                                <strong></strong>
-                                <em></em>
-                              </a>
-                            </div>
-                            <a class='button'></a>
-                          </div>
-                 
+                foreach ($obtenerGanadores as $key => $value) {
+                  echo "<h4 style='color:#001D7E'>".$value["nombre"]."</h4><h5 style='color:#BA007C'>".$value["premio"]."</h5>";
+                }
+                ?>
               </div>
               
            
@@ -101,13 +59,38 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Minimizar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Finalizar</button>
         
       </div>
     </div>
   </div>
 </div>
-
+<style  type="text/css">
+  /*
+Full screen Modal 
+*/
+.fullscreen-modal .modal-dialog {
+  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .fullscreen-modal .modal-dialog {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .fullscreen-modal .modal-dialog {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .fullscreen-modal .modal-dialog {
+     width: 1170px;
+  }
+}
+</style>
 
 <script>
 
